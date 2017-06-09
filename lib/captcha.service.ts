@@ -25,6 +25,9 @@ export class ReCaptchaService {
     }
 
     public getReady(language: String): Observable<boolean> {
+        const instances = document.querySelectorAll(`script[src="https://www.google.com/recaptcha/api.js"]`);
+        console.log('Instancje: ');
+        console.log(instances);
         if (!this.scriptLoaded) {
             this.scriptLoaded = true;
             let doc = <HTMLDivElement>document.body;
