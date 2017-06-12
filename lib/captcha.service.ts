@@ -2,11 +2,7 @@ import { Injectable, NgZone, Optional, SkipSelf } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-declare var Window: {
-    [key:string]: any; // missing index defintion
-    prototype: Window;
-    new(): Window;
-}
+
 interface Window { [key: string]: any };
 /*
  * Common service shared by all reCaptcha component instances
@@ -27,7 +23,7 @@ export class ReCaptchaService {
 
     constructor(zone: NgZone) {
         /* the callback needs to exist before the API is loaded */
-        (<Window>window).reCaptchaOnloadCallback = (() => zone.run(this.onloadCallback.bind(this)));
+        <Window> window["reCaptchaOnloadCallback"] = (() => zone.run(this.onloadCallback.bind(this)));
     }
 
     public getReady(language: String): Observable<boolean> {
