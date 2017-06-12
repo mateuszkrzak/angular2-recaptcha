@@ -2,7 +2,11 @@ import { Injectable, NgZone, Optional, SkipSelf } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-interface Window { [key: string]: any }
+declare var Window: {
+    [key:string]: any; // missing index defintion
+    prototype: Window;
+    new(): Window;
+}
 
 /*
  * Common service shared by all reCaptcha component instances
