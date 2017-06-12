@@ -7,7 +7,7 @@ declare var Window: {
     prototype: Window;
     new(): Window;
 }
-
+interface Window { [key: string]: any };
 /*
  * Common service shared by all reCaptcha component instances
  * through dependency injection.
@@ -27,7 +27,7 @@ export class ReCaptchaService {
 
     constructor(zone: NgZone) {
         /* the callback needs to exist before the API is loaded */
-        window[<any>"reCaptchaOnloadCallback"] = (() => zone.run(this.onloadCallback.bind(this)));
+        (<Window>window).reCaptchaOnloadCallback = (() => zone.run(this.onloadCallback.bind(this)));
     }
 
     public getReady(language: String): Observable<boolean> {
